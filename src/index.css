@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Light Theme Colors (Default) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  --accent-primary: #4f46e5;
+  --accent-primary-hover: #4338ca;
+  --accent-secondary: #7c3aed;
+  --accent-success: #10b981;
+  --accent-warning: #f59e0b;
+  --accent-danger: #ef4444;
+  
+  --border-color: #e2e8f0;
+}
+
+/* Dark Theme — applied by default via :root override below */
+[data-theme='dark'], :root {
+  --bg-primary: #0f1117;
+  --bg-secondary: #1a1d27;
+  --bg-tertiary: #252a36;
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --accent-primary: #6366f1;
+  --accent-primary-hover: #4f46e5;
+  --accent-secondary: #8b5cf6;
+  --accent-success: #10b981;
+  --accent-warning: #f59e0b;
+  --accent-danger: #ef4444;
+  
+  --border-color: rgba(255, 255, 255, 0.08);
+}
+
+:root {
+  /* Glassmorphism — reserved for modals/overlays */
+  --glass-bg: rgba(26, 29, 39, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-bounce: 400ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  /* Do NOT set outline:none globally — it breaks keyboard navigation.
+     We use :focus-visible instead for keyboard-only focus rings. */
+}
+
+/* ── Accessibility: keyboard focus ring ─────────────────────
+   Only shows focus outline when navigating by keyboard (Tab),
+   not on mouse clicks. This preserves visual cleanliness while
+   remaining accessible. */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Glassmorphism utility ─────────────────────────────────── */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-glass);
+}
+
+/* ── Custom scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ── Sidebar hover link ─────────────────────────────────────── */
+.sidebar-link:hover {
+  background-color: rgba(255,255,255,0.05) !important;
+  color: var(--text-primary) !important;
+}
+
+/* ── Responsive layout utilities ────────────────────────────── */
+.bottom-nav-mobile {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  /* Hide sidebar on mobile — users navigate via bottom/top controls */
+  .sidebar-desktop {
+    display: none !important;
+  }
+
+  /* Show bottom navigation */
+  .bottom-nav-mobile {
+    display: flex !important;
+  }
+
+  /* Make main content full width on mobile */
+  .main-layout {
+    flex-direction: column !important;
+  }
+
+  /* Add bottom padding to account for fixed bottom nav */
+  .main-content-area {
+    padding-bottom: calc(2rem + 64px) !important;
+  }
+
+  /* Stack dashboard grid columns on mobile */
+  .dashboard-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Allow calendar to scroll horizontally on mobile */
+  .calendar-week-grid {
+    overflow-x: auto;
+    min-width: 560px;
+  }
+}
